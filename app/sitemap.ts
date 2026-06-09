@@ -8,7 +8,7 @@ import {
 } from "@/lib/graphql/queries";
 import type { WPSitemapPost, WPCategory, WPTag } from "@/types/wordpress";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://foundoors.com";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://kianews.in";
 
 interface SitemapPostsData {
   posts: {

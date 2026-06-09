@@ -4,8 +4,8 @@ import { GET_ALL_POSTS } from "@/lib/graphql/queries";
 import type { WPPost } from "@/types/wordpress";
 import { stripHtml, truncate } from "@/lib/utils/string";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://foundoors.com";
-const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || "Foundoors";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://kianews.in";
+const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || "KiaNews";
 
 export const dynamic = "force-static";
 export const revalidate = 3600;

@@ -20,7 +20,7 @@ import TableOfContents from "@/components/article/TableOfContents";
 import ReadingProgress from "@/components/common/ReadingProgress";
 import type { BreadcrumbItem } from "@/types/seo";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://foundoors.com";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://kianews.in";
 
 export const revalidate = 60;
 

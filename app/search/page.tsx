@@ -7,7 +7,7 @@ import SearchBar from "@/components/search/SearchBar";
 import SearchResults from "@/components/search/SearchResults";
 import SearchFilters from "@/components/search/SearchFilters";
 
-const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || "Foundoors";
+const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || "KiaNews";
 
 export const metadata: Metadata = {
   title: `Search - ${SITE_NAME}`,

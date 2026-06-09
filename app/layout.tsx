@@ -5,8 +5,8 @@ import Footer from "@/components/layout/Footer";
 import JsonLd from "@/components/seo/JsonLd";
 import { buildOrganizationSchema, buildWebSiteSchema } from "@/lib/seo/schemas";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://foundoors.com";
-const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || "Foundoors";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://kianews.in";
+const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || "KiaNews";
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 export const metadata: Metadata = {
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    site: "@foundoors",
+    site: "@kianews",
   },
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,

@@ -3,8 +3,8 @@ import { fetchGraphQL } from "@/lib/graphql/client";
 import { GET_RECENT_POSTS_FOR_NEWS_SITEMAP } from "@/lib/graphql/queries";
 import type { WPSitemapPost } from "@/types/wordpress";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://foundoors.com";
-const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || "Foundoors";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://kianews.in";
+const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || "KiaNews";
 
 interface RecentPostsData {
   posts: { nodes: WPSitemapPost[] };

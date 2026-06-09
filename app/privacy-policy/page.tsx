@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
-const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || "Foundoors";
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://foundoors.com";
+const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || "KiaNews";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://kianews.in";
 
 export const metadata: Metadata = {
   title: `Privacy Policy - ${SITE_NAME}`,
@@ -59,7 +59,7 @@ export default function PrivacyPolicyPage() {
         <p>
           Depending on your location, you may have the right to access, correct, delete, or
           restrict the processing of your personal information. To exercise these rights, please
-          contact us at <a href="mailto:privacy@foundoors.com">privacy@foundoors.com</a>.
+          contact us at <a href="mailto:privacy@kianews.in">privacy@kianews.in</a>.
         </p>
 
         <h2>Data Retention</h2>
@@ -71,7 +71,7 @@ export default function PrivacyPolicyPage() {
         <h2>Contact</h2>
         <p>
           Questions about this privacy policy should be directed to{" "}
-          <a href="mailto:privacy@foundoors.com">privacy@foundoors.com</a>.
+          <a href="mailto:privacy@kianews.in">privacy@kianews.in</a>.
         </p>
       </div>
     </div>

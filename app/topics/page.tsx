@@ -4,7 +4,7 @@ import { fetchGraphQL } from "@/lib/graphql/client";
 import { GET_CATEGORIES, GET_TAGS } from "@/lib/graphql/queries";
 import type { WPCategory, WPTag } from "@/types/wordpress";
 
-const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || "Foundoors";
+const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || "KiaNews";
 
 export const metadata: Metadata = {
   title: `Topics - ${SITE_NAME}`,

@@ -7,8 +7,8 @@ import ArticleCard from "@/components/article/ArticleCard";
 import ArticleGrid from "@/components/article/ArticleGrid";
 import NewsletterSignup from "@/components/common/NewsletterSignup";
 
-const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || "Foundoors";
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://foundoors.com";
+const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || "KiaNews";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://kianews.in";
 
 export const revalidate = 300;
 

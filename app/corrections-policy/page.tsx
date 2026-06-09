@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
-const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || "Foundoors";
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://foundoors.com";
+const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || "KiaNews";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://kianews.in";
 
 export const metadata: Metadata = {
   title: `Corrections Policy - ${SITE_NAME}`,
@@ -40,7 +40,7 @@ export default function CorrectionsPage() {
         <h2>Reporting an Error</h2>
         <p>
           If you believe we have made an error, please contact us at{" "}
-          <a href="mailto:corrections@foundoors.com">corrections@foundoors.com</a>{" "}
+          <a href="mailto:corrections@kianews.in">corrections@kianews.in</a>{" "}
           with the article URL, the specific error, and the correct information with supporting
           evidence where available.
         </p>

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
-const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || "Foundoors";
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://foundoors.com";
+const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || "KiaNews";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://kianews.in";
 
 export const metadata: Metadata = {
   title: `Contact - ${SITE_NAME}`,
@@ -21,10 +21,10 @@ export default function ContactPage() {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {[
-          { title: "Editorial", email: "editorial@foundoors.com", desc: "Story tips, corrections, press releases" },
-          { title: "Advertising", email: "ads@foundoors.com", desc: "Sponsorships, partnerships, media kit" },
-          { title: "Legal", email: "legal@foundoors.com", desc: "DMCA, legal notices, privacy requests" },
-          { title: "General", email: "hello@foundoors.com", desc: "Everything else" },
+          { title: "Editorial", email: "editorial@kianews.in", desc: "Story tips, corrections, press releases" },
+          { title: "Advertising", email: "ads@kianews.in", desc: "Sponsorships, partnerships, media kit" },
+          { title: "Legal", email: "legal@kianews.in", desc: "DMCA, legal notices, privacy requests" },
+          { title: "General", email: "hello@kianews.in", desc: "Everything else" },
         ].map((item) => (
           <div
             key={item.title}

@@ -4,8 +4,8 @@ import { GET_ALL_POSTS } from "@/lib/graphql/queries";
 import type { WPPost } from "@/types/wordpress";
 import { stripHtml, truncate } from "@/lib/utils/string";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://foundoors.com";
-const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || "Foundoors";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://kianews.in";
+const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || "KiaNews";
 
 export const dynamic = "force-static";
 export const revalidate = 3600;
@@ -47,7 +47,7 @@ export async function GET() {
       <guid isPermaLink="true">${url}</guid>
       <description>${description}</description>
       <pubDate>${pubDate}</pubDate>
-      <author>${escapeXml("editorial@foundoors.com")} (${author})</author>
+      <author>${escapeXml("editorial@kianews.in")} (${author})</author>
       ${categories}
       ${post.featuredImage?.node ? `<enclosure url="${escapeXml(post.featuredImage.node.sourceUrl)}" type="image/jpeg" length="0"/>` : ""}
     </item>`;
@@ -65,8 +65,8 @@ export async function GET() {
     <link>${SITE_URL}</link>
     <description>Authoritative news and analysis for founders, investors, and business leaders.</description>
     <language>en-us</language>
-    <managingEditor>editorial@foundoors.com (${escapeXml(SITE_NAME)} Editorial)</managingEditor>
-    <webMaster>tech@foundoors.com (${escapeXml(SITE_NAME)} Tech)</webMaster>
+    <managingEditor>editorial@kianews.in (${escapeXml(SITE_NAME)} Editorial)</managingEditor>
+    <webMaster>tech@kianews.in (${escapeXml(SITE_NAME)} Tech)</webMaster>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
     <atom:link href="${SITE_URL}/feed.xml" rel="self" type="application/rss+xml"/>
     <image>

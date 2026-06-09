@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
-const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || "Foundoors";
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://foundoors.com";
+const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || "KiaNews";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://kianews.in";
 
 export const metadata: Metadata = {
   title: `Editorial Policy - ${SITE_NAME}`,
@@ -65,7 +65,7 @@ export default function EditorialPolicyPage() {
         <h2>Contact</h2>
         <p>
           Questions about our editorial standards should be directed to{" "}
-          <a href="mailto:editorial@foundoors.com">editorial@foundoors.com</a>.
+          <a href="mailto:editorial@kianews.in">editorial@kianews.in</a>.
         </p>
       </div>
     </div>

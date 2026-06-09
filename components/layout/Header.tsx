@@ -9,7 +9,7 @@ export default function Header() {
         <div className="relative flex items-center justify-between h-16 gap-4">
           <Link href="/" className="flex items-center gap-2 shrink-0">
             <span className="text-xl font-bold text-primary-600 dark:text-primary-400">
-              Foundoors
+              KiaNews
             </span>
           </Link>
           <div className="hidden md:flex flex-1 max-w-xs">

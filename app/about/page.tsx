@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
-const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || "Foundoors";
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://foundoors.com";
+const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || "KiaNews";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://kianews.in";
 
 export const metadata: Metadata = {
   title: `About - ${SITE_NAME}`,
@@ -40,7 +40,7 @@ export default function AboutPage() {
         <h2>Contact</h2>
         <p>
           For editorial inquiries, please email{" "}
-          <a href="mailto:editorial@foundoors.com">editorial@foundoors.com</a>.
+          <a href="mailto:editorial@kianews.in">editorial@kianews.in</a>.
           For business inquiries, please visit our{" "}
           <a href="/contact">contact page</a>.
         </p>

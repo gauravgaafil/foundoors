@@ -10,7 +10,7 @@ import JsonLd from "@/components/seo/JsonLd";
 import ArticleGrid from "@/components/article/ArticleGrid";
 import Breadcrumb from "@/components/layout/Breadcrumb";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://foundoors.com";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://kianews.in";
 
 export const revalidate = 300;
 

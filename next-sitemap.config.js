@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://foundoors.com",
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://kianews.in",
   generateRobotsTxt: false, // handled by app/robots.ts
   exclude: [
     "/api/*",

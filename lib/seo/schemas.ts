@@ -10,8 +10,8 @@ import type {
 } from "@/types/seo";
 import type { WPPost, WPAuthor } from "@/types/wordpress";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://foundoors.com";
-const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || "Foundoors";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://kianews.in";
+const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || "KiaNews";
 
 export function buildOrganizationSchema(): OrganizationSchema {
   return {
@@ -26,14 +26,14 @@ export function buildOrganizationSchema(): OrganizationSchema {
       height: 512,
     },
     sameAs: [
-      "https://twitter.com/foundoors",
-      "https://linkedin.com/company/foundoors",
+      "https://twitter.com/kianews",
+      "https://linkedin.com/company/kianews",
     ],
     contactPoint: [
       {
         "@type": "ContactPoint",
         contactType: "editorial",
-        email: "editorial@foundoors.com",
+        email: "editorial@kianews.in",
       },
     ],
   };
