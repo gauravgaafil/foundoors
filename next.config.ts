@@ -1,8 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // standalone output bundles the app for self-hosted Node.js (PM2 on Hostinger VPS)
-  output: "standalone",
   images: {
     remotePatterns: [
       {
