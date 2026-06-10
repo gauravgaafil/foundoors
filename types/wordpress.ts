@@ -64,7 +64,8 @@ export interface WPAEOFields {
   keyFacts?: string;
   whyItMatters?: string;
   sources?: string;
-  faqItems?: WPFAQItem[];
+  // Plain text in "Q: ...\nA: ...\n\nQ: ...\nA: ..." format, parsed via parseFAQText()
+  faqItems?: string;
 }
 
 export interface WPPost {

@@ -19,6 +19,7 @@ import RelatedArticles from "@/components/article/RelatedArticles";
 import TableOfContents from "@/components/article/TableOfContents";
 import ReadingProgress from "@/components/common/ReadingProgress";
 import type { BreadcrumbItem } from "@/types/seo";
+import { parseFAQText } from "@/lib/utils/faq";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://kianews.in";
 
@@ -79,8 +80,9 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     buildBreadcrumbSchema(breadcrumbs) as unknown as Record<string, unknown>,
   ];
 
-  if (post.aeoFields?.faqItems?.length) {
-    schemas.push(buildFAQPageSchema(post.aeoFields.faqItems) as unknown as Record<string, unknown>);
+  const faqItems = parseFAQText(post.aeoFields?.faqItems);
+  if (faqItems.length > 0) {
+    schemas.push(buildFAQPageSchema(faqItems) as unknown as Record<string, unknown>);
   }
 
   const jsonLdData = wrapInGraphSchema(...schemas);

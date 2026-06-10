@@ -77,10 +77,7 @@ export const AEO_FIELDS = `
       keyFacts
       whyItMatters
       sources
-      faqItems {
-        question
-        answer
-      }
+      faqItems
     }
   }
 `;

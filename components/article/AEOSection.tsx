@@ -1,4 +1,5 @@
 import type { WPAEOFields, WPFAQItem } from "@/types/wordpress";
+import { parseFAQText } from "@/lib/utils/faq";
 
 interface AEOSectionProps {
   aeoFields: WPAEOFields;
@@ -50,9 +51,10 @@ function SectionWrapper({ title, children, id }: { title: string; children: Reac
 }
 
 export default function AEOSection({ aeoFields }: AEOSectionProps) {
-  const { summary, keyFacts, whyItMatters, sources, faqItems } = aeoFields;
+  const { summary, keyFacts, whyItMatters, sources, faqItems: faqItemsRaw } = aeoFields;
+  const faqItems = parseFAQText(faqItemsRaw);
 
-  if (!summary && !keyFacts && !whyItMatters && !sources && (!faqItems || !faqItems.length)) {
+  if (!summary && !keyFacts && !whyItMatters && !sources && faqItems.length === 0) {
     return null;
   }
 
@@ -110,7 +112,7 @@ export default function AEOSection({ aeoFields }: AEOSectionProps) {
         </SectionWrapper>
       )}
 
-      {faqItems && faqItems.length > 0 && (
+      {faqItems.length > 0 && (
         <section
           id="aeo-faq"
           aria-labelledby="aeo-faq-heading"
