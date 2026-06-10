@@ -78,7 +78,7 @@ export default function RootLayout({
             />
           </>
         )}
-        <JsonLd schema={[orgSchema as Record<string, unknown>, siteSchema as Record<string, unknown>]} />
+        <JsonLd schema={[orgSchema as unknown as Record<string, unknown>, siteSchema as unknown as Record<string, unknown>]} />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

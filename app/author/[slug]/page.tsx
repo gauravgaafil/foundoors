@@ -54,7 +54,7 @@ export default async function AuthorPage({ params }: AuthorPageProps) {
 
   return (
     <>
-      <JsonLd schema={[personSchema as Record<string, unknown>, breadcrumbSchema as Record<string, unknown>]} />
+      <JsonLd schema={[personSchema as unknown as Record<string, unknown>, breadcrumbSchema as unknown as Record<string, unknown>]} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <Breadcrumb
           items={[

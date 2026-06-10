@@ -75,12 +75,12 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   ];
 
   const schemas: Record<string, unknown>[] = [
-    buildNewsArticleSchema(post, url) as Record<string, unknown>,
-    buildBreadcrumbSchema(breadcrumbs) as Record<string, unknown>,
+    buildNewsArticleSchema(post, url) as unknown as Record<string, unknown>,
+    buildBreadcrumbSchema(breadcrumbs) as unknown as Record<string, unknown>,
   ];
 
   if (post.aeoFields?.faqItems?.length) {
-    schemas.push(buildFAQPageSchema(post.aeoFields.faqItems) as Record<string, unknown>);
+    schemas.push(buildFAQPageSchema(post.aeoFields.faqItems) as unknown as Record<string, unknown>);
   }
 
   const jsonLdData = wrapInGraphSchema(...schemas);
