@@ -2,42 +2,29 @@ import type { WPFAQItem } from "@/types/wordpress";
 
 /**
  * Parses FAQ text in the format:
- *   Q: Question one?
- *   A: Answer one.
+ *   Q: Question one? A: Answer one.
+ *   Q: Question two? A: Answer two.
  *
- *   Q: Question two?
- *   A: Answer two.
- *
- * into structured FAQ items. Lines must start with "Q:" or "A:" (case-insensitive).
- * Multi-line answers are supported until the next "Q:" line.
+ * Works whether pairs are separated by newlines or all on one line —
+ * some field types (e.g. ACF "Text") strip newline characters on save,
+ * so this matches "Q:" / "A:" markers anywhere in the string.
  */
 export function parseFAQText(raw?: string | null): WPFAQItem[] {
   if (!raw) return [];
 
-  const lines = raw.split("\n");
+  const normalized = raw.replace(/\r\n/g, "\n");
   const items: WPFAQItem[] = [];
-  let current: { question: string; answer: string[] } | null = null;
 
-  for (const line of lines) {
-    const trimmed = line.trim();
-    const qMatch = trimmed.match(/^Q[:.]?\s*(.*)$/i);
-    const aMatch = trimmed.match(/^A[:.]?\s*(.*)$/i);
+  const pairRegex = /Q[:.]?\s*(.*?)\s*A[:.]?\s*(.*?)(?=\s*Q[:.]|$)/gis;
+  let match: RegExpExecArray | null;
 
-    if (qMatch) {
-      if (current) {
-        items.push({ question: current.question, answer: current.answer.join(" ").trim() });
-      }
-      current = { question: qMatch[1].trim(), answer: [] };
-    } else if (aMatch && current) {
-      current.answer.push(aMatch[1].trim());
-    } else if (trimmed && current) {
-      current.answer.push(trimmed);
+  while ((match = pairRegex.exec(normalized)) !== null) {
+    const question = match[1].trim();
+    const answer = match[2].trim();
+    if (question && answer) {
+      items.push({ question, answer });
     }
   }
 
-  if (current) {
-    items.push({ question: current.question, answer: current.answer.join(" ").trim() });
-  }
-
-  return items.filter((item) => item.question && item.answer);
+  return items;
 }
