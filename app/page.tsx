@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { fetchGraphQL } from "@/lib/graphql/client";
-import { GET_HOMEPAGE_POSTS } from "@/lib/graphql/queries";
-import type { WPPost, WPCategory } from "@/types/wordpress";
+import { GET_HOMEPAGE_POSTS, GET_SIDEBAR_DATA } from "@/lib/graphql/queries";
+import type { WPPost, WPCategory, WPTag } from "@/types/wordpress";
 import ArticleCard from "@/components/article/ArticleCard";
 import ArticleGrid from "@/components/article/ArticleGrid";
 import NewsletterSignup from "@/components/common/NewsletterSignup";
+import Sidebar from "@/components/layout/Sidebar";
 
 const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || "KiaNews";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://kianews.in";
@@ -32,8 +33,17 @@ interface HomepageData {
   categories: { nodes: WPCategory[] };
 }
 
+interface SidebarData {
+  trendingPosts: { nodes: WPPost[] };
+  categories: { nodes: WPCategory[] };
+  tags: { nodes: WPTag[] };
+}
+
 export default async function HomePage() {
-  const data = await fetchGraphQL<HomepageData>(GET_HOMEPAGE_POSTS);
+  const [data, sidebarData] = await Promise.all([
+    fetchGraphQL<HomepageData>(GET_HOMEPAGE_POSTS),
+    fetchGraphQL<SidebarData>(GET_SIDEBAR_DATA),
+  ]);
 
   const featuredPost = data?.featuredPosts?.nodes[0] ?? null;
   const latestPosts = data?.latestPosts?.nodes ?? [];
@@ -67,20 +77,34 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* Latest articles */}
-      <section aria-labelledby="latest-heading" className="mb-16">
-        <div className="flex items-center justify-between mb-6">
-          <h2 id="latest-heading" className="text-2xl font-bold text-gray-900 dark:text-white">
-            Latest Articles
-          </h2>
-        </div>
-        <ArticleGrid posts={latestPosts.slice(0, 9)} columns={3} />
-      </section>
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-12">
+        <div>
+          {/* Latest articles */}
+          <section aria-labelledby="latest-heading" className="mb-16">
+            <div className="flex items-center justify-between mb-6">
+              <h2 id="latest-heading" className="text-2xl font-bold text-gray-900 dark:text-white">
+                Latest Articles
+              </h2>
+            </div>
+            <ArticleGrid posts={latestPosts.slice(0, 9)} columns={2} />
+          </section>
 
-      {/* Newsletter */}
-      <section aria-label="Newsletter signup" className="mb-16">
-        <NewsletterSignup />
-      </section>
+          {/* Newsletter */}
+          <section aria-label="Newsletter signup" className="mb-16">
+            <NewsletterSignup />
+          </section>
+        </div>
+
+        <div className="hidden lg:block">
+          <div className="sticky top-24">
+            <Sidebar
+              trendingPosts={sidebarData?.trendingPosts?.nodes}
+              categories={sidebarData?.categories?.nodes}
+              tags={sidebarData?.tags?.nodes}
+            />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

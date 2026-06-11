@@ -1,13 +1,14 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { fetchGraphQL } from "@/lib/graphql/client";
-import { GET_POSTS_BY_TAG } from "@/lib/graphql/queries";
-import type { WPPost, WPTag } from "@/types/wordpress";
+import { GET_POSTS_BY_TAG, GET_SIDEBAR_DATA } from "@/lib/graphql/queries";
+import type { WPPost, WPTag, WPCategory } from "@/types/wordpress";
 import { buildTagMetadata } from "@/lib/seo/metadata";
 import { buildBreadcrumbSchema } from "@/lib/seo/schemas";
 import JsonLd from "@/components/seo/JsonLd";
 import ArticleGrid from "@/components/article/ArticleGrid";
 import Breadcrumb from "@/components/layout/Breadcrumb";
+import Sidebar from "@/components/layout/Sidebar";
 
 export const revalidate = 300;
 
@@ -32,11 +33,20 @@ export async function generateMetadata({ params }: TagPageProps): Promise<Metada
   return buildTagMetadata(data.tag);
 }
 
+interface SidebarData {
+  trendingPosts: { nodes: WPPost[] };
+  categories: { nodes: WPCategory[] };
+  tags: { nodes: WPTag[] };
+}
+
 export default async function TagPage({ params }: TagPageProps) {
-  const data = await fetchGraphQL<TagData>(GET_POSTS_BY_TAG, {
-    slug: params.slug,
-    first: 12,
-  });
+  const [data, sidebarData] = await Promise.all([
+    fetchGraphQL<TagData>(GET_POSTS_BY_TAG, {
+      slug: params.slug,
+      first: 12,
+    }),
+    fetchGraphQL<SidebarData>(GET_SIDEBAR_DATA),
+  ]);
 
   if (!data?.tag) notFound();
 
@@ -61,7 +71,20 @@ export default async function TagPage({ params }: TagPageProps) {
             <p className="text-lg text-gray-500 dark:text-gray-400 max-w-2xl">{tag.description}</p>
           )}
         </div>
-        <ArticleGrid posts={posts} columns={3} />
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-12">
+          <div>
+            <ArticleGrid posts={posts} columns={2} />
+          </div>
+          <div className="hidden lg:block">
+            <div className="sticky top-24">
+              <Sidebar
+                trendingPosts={sidebarData?.trendingPosts?.nodes}
+                categories={sidebarData?.categories?.nodes}
+                tags={sidebarData?.tags?.nodes}
+              />
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );

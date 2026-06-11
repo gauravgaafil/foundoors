@@ -307,6 +307,41 @@ export const GET_HOMEPAGE_POSTS = `
   }
 `;
 
+export const GET_SIDEBAR_DATA = `
+  query GetSidebarData {
+    trendingPosts: posts(first: 5, where: { status: PUBLISH, orderby: { field: DATE, order: DESC } }) {
+      nodes {
+        id
+        title
+        slug
+        date
+        featuredImage {
+          node {
+            sourceUrl
+            altText
+          }
+        }
+      }
+    }
+    categories(first: 8, where: { hideEmpty: true, orderby: COUNT, order: DESC }) {
+      nodes {
+        id
+        name
+        slug
+        count
+      }
+    }
+    tags(first: 12, where: { hideEmpty: true, orderby: COUNT, order: DESC }) {
+      nodes {
+        id
+        name
+        slug
+        count
+      }
+    }
+  }
+`;
+
 export const GET_ALL_AUTHORS_FOR_SITEMAP = `
   query GetAllAuthorsForSitemap {
     users(first: 100, where: { hasPublishedPosts: POST }) {

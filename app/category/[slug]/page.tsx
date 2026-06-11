@@ -1,13 +1,14 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { fetchGraphQL } from "@/lib/graphql/client";
-import { GET_POSTS_BY_CATEGORY } from "@/lib/graphql/queries";
-import type { WPPost, WPCategory } from "@/types/wordpress";
+import { GET_POSTS_BY_CATEGORY, GET_SIDEBAR_DATA } from "@/lib/graphql/queries";
+import type { WPPost, WPCategory, WPTag } from "@/types/wordpress";
 import { buildCategoryMetadata } from "@/lib/seo/metadata";
 import { buildBreadcrumbSchema } from "@/lib/seo/schemas";
 import JsonLd from "@/components/seo/JsonLd";
 import ArticleGrid from "@/components/article/ArticleGrid";
 import Breadcrumb from "@/components/layout/Breadcrumb";
+import Sidebar from "@/components/layout/Sidebar";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://kianews.in";
 
@@ -21,6 +22,12 @@ interface CategoryData {
   category: (WPCategory & { posts: { nodes: WPPost[]; pageInfo: { hasNextPage: boolean; endCursor: string } } }) | null;
 }
 
+interface SidebarData {
+  trendingPosts: { nodes: WPPost[] };
+  categories: { nodes: WPCategory[] };
+  tags: { nodes: WPTag[] };
+}
+
 export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
   const data = await fetchGraphQL<CategoryData>(GET_POSTS_BY_CATEGORY, { slug: params.slug, first: 1 });
   if (!data?.category) return {};
@@ -28,10 +35,13 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
 }
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
-  const data = await fetchGraphQL<CategoryData>(GET_POSTS_BY_CATEGORY, {
-    slug: params.slug,
-    first: 12,
-  });
+  const [data, sidebarData] = await Promise.all([
+    fetchGraphQL<CategoryData>(GET_POSTS_BY_CATEGORY, {
+      slug: params.slug,
+      first: 12,
+    }),
+    fetchGraphQL<SidebarData>(GET_SIDEBAR_DATA),
+  ]);
 
   if (!data?.category) notFound();
 
@@ -66,7 +76,20 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
             <p className="mt-2 text-sm text-gray-400">{category.count} articles</p>
           )}
         </div>
-        <ArticleGrid posts={posts} columns={3} />
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-12">
+          <div>
+            <ArticleGrid posts={posts} columns={2} />
+          </div>
+          <div className="hidden lg:block">
+            <div className="sticky top-24">
+              <Sidebar
+                trendingPosts={sidebarData?.trendingPosts?.nodes}
+                categories={sidebarData?.categories?.nodes}
+                tags={sidebarData?.tags?.nodes}
+              />
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
