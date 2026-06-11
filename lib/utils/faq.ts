@@ -15,7 +15,7 @@ export function parseFAQText(raw?: string | null): WPFAQItem[] {
   const normalized = raw.replace(/\r\n/g, "\n");
   const items: WPFAQItem[] = [];
 
-  const pairRegex = /Q[:.]?\s*([\s\S]*?)\s*A[:.]?\s*([\s\S]*?)(?=\s*Q[:.]|$)/gi;
+  const pairRegex = /Q:\s*([\s\S]*?)\s*A:\s*([\s\S]*?)(?=\s*Q:|$)/gi;
   let match: RegExpExecArray | null;
 
   while ((match = pairRegex.exec(normalized)) !== null) {
