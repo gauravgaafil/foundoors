@@ -50,11 +50,11 @@ function SectionWrapper({ title, children, id }: { title: string; children: Reac
   );
 }
 
-export default function AEOSection({ aeoFields }: AEOSectionProps) {
-  const { summary, keyFacts, whyItMatters, sources, faqItems: faqItemsRaw } = aeoFields;
-  const faqItems = parseFAQText(faqItemsRaw);
+/** Renders Summary, Key Facts, and Why It Matters — placed before the article body. */
+export function AEOSectionTop({ aeoFields }: AEOSectionProps) {
+  const { summary, keyFacts, whyItMatters } = aeoFields;
 
-  if (!summary && !keyFacts && !whyItMatters && !sources && faqItems.length === 0) {
+  if (!summary && !keyFacts && !whyItMatters) {
     return null;
   }
 
@@ -84,6 +84,35 @@ export default function AEOSection({ aeoFields }: AEOSectionProps) {
           <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{whyItMatters}</p>
         </SectionWrapper>
       )}
+    </div>
+  );
+}
+
+/** Renders FAQ then Sources — placed after the article body. */
+export function AEOSectionBottom({ aeoFields }: AEOSectionProps) {
+  const { sources, faqItems: faqItemsRaw } = aeoFields;
+  const faqItems = parseFAQText(faqItemsRaw);
+
+  if (faqItems.length === 0 && !sources) {
+    return null;
+  }
+
+  return (
+    <div className="my-10 space-y-6">
+      {faqItems.length > 0 && (
+        <section
+          id="aeo-faq"
+          aria-labelledby="aeo-faq-heading"
+          className="my-10"
+          itemScope
+          itemType="https://schema.org/FAQPage"
+        >
+          <h2 id="aeo-faq-heading" className="text-xl font-bold text-gray-900 dark:text-white mb-6">
+            Frequently Asked Questions
+          </h2>
+          <FAQAccordion items={faqItems} />
+        </section>
+      )}
 
       {sources && (
         <SectionWrapper title="Sources" id="aeo-sources">
@@ -110,21 +139,6 @@ export default function AEOSection({ aeoFields }: AEOSectionProps) {
             })}
           </ul>
         </SectionWrapper>
-      )}
-
-      {faqItems.length > 0 && (
-        <section
-          id="aeo-faq"
-          aria-labelledby="aeo-faq-heading"
-          className="my-10"
-          itemScope
-          itemType="https://schema.org/FAQPage"
-        >
-          <h2 id="aeo-faq-heading" className="text-xl font-bold text-gray-900 dark:text-white mb-6">
-            Frequently Asked Questions
-          </h2>
-          <FAQAccordion items={faqItems} />
-        </section>
       )}
     </div>
   );

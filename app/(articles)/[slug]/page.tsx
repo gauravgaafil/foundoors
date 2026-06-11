@@ -13,7 +13,7 @@ import {
 import JsonLd from "@/components/seo/JsonLd";
 import ArticleHeader from "@/components/article/ArticleHeader";
 import ArticleBody from "@/components/article/ArticleBody";
-import AEOSection from "@/components/article/AEOSection";
+import { AEOSectionTop, AEOSectionBottom } from "@/components/article/AEOSection";
 import AuthorBio from "@/components/article/AuthorBio";
 import RelatedArticles from "@/components/article/RelatedArticles";
 import TableOfContents from "@/components/article/TableOfContents";
@@ -99,10 +99,14 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             <ArticleHeader post={post} url={url} />
 
             {post.aeoFields && (
-              <AEOSection aeoFields={post.aeoFields} />
+              <AEOSectionTop aeoFields={post.aeoFields} />
             )}
 
             <ArticleBody content={post.content || ""} />
+
+            {post.aeoFields && (
+              <AEOSectionBottom aeoFields={post.aeoFields} />
+            )}
 
             {post.author?.node && (
               <div className="mt-12">
